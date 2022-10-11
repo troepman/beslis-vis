@@ -1,0 +1,117 @@
+html, body {
+    padding:0px;
+    margin:0px;
+    font-family: 'Silkscreen', cursive;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aqua;
+    color:orange;
+}
+
+h1 {
+    font-size: 72pt;
+    -webkit-text-stroke: 1px darkgoldenrod;
+    text-shadow: 3px 3px #000;
+}
+header {
+    height:30vh;
+}
+content {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.question-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text-input {
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #efefef;
+    color:gray;
+    font-family: 'Silkscreen', cursive;
+    outline: none;
+    transition: border-color 1s,
+                background-color 2s;
+}
+
+.text-input:focus, .text-input:active {
+    background-color: #ffefef;
+    border: 2px solid darkgoldenrod;
+}
+
+.go-button-wrapper {
+    width:30px;
+    margin-left: 10px;
+}
+.go-button {
+    font-size: 32pt;
+    -webkit-text-stroke: 1px darkgoldenrod;
+    text-shadow: 3px 3px #000;
+    letter-spacing: -5pt;
+    cursor: pointer;
+    transition: padding-left 0.3s,
+                letter-spacing 0.2s;
+    padding-left: 0px;
+}
+.go-button:hover {
+    padding-left: 10px;
+    letter-spacing:-10pt;
+}
+
+.bubble {
+    border-radius: 100%;
+    border: 1px solid #efefefdf;
+    background-color: #efefef7f;
+    box-shadow: inset 5px -5px 25px 5px #efefefbf;
+    width:100px;
+    height: 100px;
+    position: absolute;
+    top:0px;
+    z-index: -1;
+}
+screen#feeding{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search {
+    display: block;
+    position:absolute;
+    transform: translate(-50%, 0); 
+    font-size: 40px;
+    animation-name: anim-search;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    max-width: 80vw;
+}
+.search:nth-child(0) {
+    animation-delay: 0s;
+}
+.search:nth-child(1) {
+    animation-delay: 3.3s;
+}
+.search:nth-child(2) {
+    animation-delay: 6.6s;
+}
+
+@keyframes anim-search {
+    0% {opacity:0;}
+    5% {opacity:1;}
+    28% {opacity:1;}
+    33% {opacity:0;}
+    100% {opacity:0;}
+}

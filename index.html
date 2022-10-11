@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Beslis vis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap"
+      rel="stylesheet"
+    />
+    <link href="main.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Beslis vis</h1>
+    </header>
+    <content>
+      <screen id="question">
+        <div class="question-line">
+          <input
+            class="text-input"
+            type="text"
+            id="question-field"
+            name="question"
+            placeholder="Shall I?"
+          />
+
+          <div class="go-button-wrapper">
+            <div class="go-button" id="go-button" name="go-button">>></div>
+          </div>
+        </div>
+      </screen>
+      <screen id="feeding">
+        <div>
+          <span class="search">Finding a fish</span>
+          <span class="search">Feeding your fish</span>
+          <span class="search">Asking your fish</span>
+        </div>
+      </screen>
+      <screen id="answer">
+        <video id="video-answer"></video>
+      </screen>
+    </content>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </body>
+</html>
