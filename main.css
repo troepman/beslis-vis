@@ -108,6 +108,38 @@ screen#feeding{
     animation-delay: 6.6s;
 }
 
+#video-answer {
+    max-height: 50vh;
+    
+}
+.video-answer-wrapper {
+    position:relative;
+    border-radius: 15px 15px 100px 100px;
+    border: 5px solid darkgoldenrod;
+    background-color: black;
+    overflow: hidden;
+}
+.video-answer-side {
+    height:100%;
+    width: 50%;
+    top: 0;
+    position:absolute;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+}
+.video-answer-side.yes {
+    left: 50%;
+    background-color: #00ff0060;
+    color: #00ff00;
+}
+.video-answer-side.no {
+    left: 0%;
+    background-color: #ff000060;
+    color: #ff0000;
+}
+
 @keyframes anim-search {
     0% {opacity:0;}
     5% {opacity:1;}

@@ -54,24 +54,47 @@ function newState(newState) {
             showScreen("question");
         break;
         case "Feeding":
-            showScreen("feeding")
+            showScreen("feeding");
+            setTimeout(() => {
+                document.getElementById('video-answer').src = newState.videoFragment
+                document.getElementById('video-answer').load();
+            }, 1000);
+        break;
+        case "Answer":
+            showScreen("answer");
+        break;
+
     }
     applicationState = newState;
 }
 
 function onAskQuestion() {
     const question = document.getElementById('question-field').value;
-
-    newState({state:"Feeding", question});
-
+    
+    index = Math.round(Math.random() * 118);
+    newState({state:"Feeding", question, videoFragment: `fragments/fragment${index}.mp4`});
 }
 
 function onVideoReady() {
-    if (state.state !== 'Feeding') { 
+    if (applicationState.state !== 'Feeding') { 
         return;
     }
+    document.getElementById('video-answer').play();
 
     newState({state:'Answer'})
+}
+
+function parseUrl(){
+    const query = window.location.search.substring(1);
+    const vars = query.split('&');
+    const result = {}
+    for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split('=');
+        result[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+        
+    }
+
+    return result;
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -84,5 +107,15 @@ window.addEventListener('DOMContentLoaded', () => {
         screen.hidden = true;
     }
     setupBubblesAnimation();
-    newState({state:"Question"});
+
+    const query = parseUrl()
+    console.log(query);
+    if ('q' in query){
+        const index = Math.round(Math.random() * 118);
+        const fragment = query['a'] ?? `fragment${index}`
+        
+        newState({state:"Feeding", question: query['q'], videoFragment: `fragments/${fragment}.mp4`});
+    } else {
+        newState({state:"Question"});
+    }
 })
