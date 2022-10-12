@@ -20,7 +20,7 @@ h1 {
     text-shadow: 3px 3px #000;
 }
 header {
-    height:30vh;
+    flex: auto 0 0;
 }
 content {
     height: 70vh;
@@ -83,6 +83,9 @@ content {
     top:0px;
     z-index: -1;
 }
+screen {
+    display: block;
+}
 screen#feeding{
     display: flex;
     flex-direction: column;
@@ -90,27 +93,24 @@ screen#feeding{
 }
 .search {
     display: block;
-    position:absolute;
+    position: absolute;
     transform: translate(-50%, 0); 
     font-size: 40px;
-    animation-name: anim-search;
-    animation-duration: 10s;
-    animation-iteration-count: infinite;
-    max-width: 80vw;
+    transition: opacity 0.5s;
 }
-.search:nth-child(0) {
-    animation-delay: 0s;
-}
-.search:nth-child(1) {
-    animation-delay: 3.3s;
-}
-.search:nth-child(2) {
-    animation-delay: 6.6s;
+
+screen#answer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #video-answer {
-    max-height: 50vh;
-    
+    max-height: 50vh;    
+}
+.video-answer-question {
+    font-size: 20pt;
+    margin-bottom: 10px;
 }
 .video-answer-wrapper {
     position:relative;
@@ -129,6 +129,9 @@ screen#feeding{
     flex-direction: column;
     align-items: center;
 }
+.video-answer-side span {
+    font-size: 20pt;
+}
 .video-answer-side.yes {
     left: 50%;
     background-color: #00ff0060;
@@ -140,10 +143,4 @@ screen#feeding{
     color: #ff0000;
 }
 
-@keyframes anim-search {
-    0% {opacity:0;}
-    5% {opacity:1;}
-    28% {opacity:1;}
-    33% {opacity:0;}
-    100% {opacity:0;}
-}
+

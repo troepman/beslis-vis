@@ -44,8 +44,7 @@ function showScreen(name){
         const screen = screens[screenName];
         screen.style.display = 'none';
     }
-    console.log(screens)
-    screens[name].style.display = 'block'
+    screens[name].style.display = '';
 }
 
 function newState(newState) {
@@ -58,9 +57,11 @@ function newState(newState) {
             setTimeout(() => {
                 document.getElementById('video-answer').src = newState.videoFragment
                 document.getElementById('video-answer').load();
-            }, 1000);
+            }, 6000);
+            startSearchAnimation()
         break;
         case "Answer":
+            stopSearchAnimation();
             showScreen("answer");
         break;
 
@@ -68,8 +69,15 @@ function newState(newState) {
     applicationState = newState;
 }
 
+function formatQuestion(q){
+    if (!q.endsWith('?')){
+        q += '?'
+    }
+    return q;
+}
+
 function onAskQuestion() {
-    const question = document.getElementById('question-field').value;
+    const question = formatQuestion(document.getElementById('question-field').value);
     
     index = Math.round(Math.random() * 118);
     newState({state:"Feeding", question, videoFragment: `fragments/fragment${index}.mp4`});
@@ -80,8 +88,9 @@ function onVideoReady() {
         return;
     }
     document.getElementById('video-answer').play();
+    document.getElementById('video-answer-question').innerText = applicationState.question;
 
-    newState({state:'Answer'})
+    newState({state:'Answer', question: applicationState.question, videoFragment: applicationState.videoFragment})
 }
 
 function parseUrl(){
@@ -97,8 +106,51 @@ function parseUrl(){
     return result;
 }
 
+const searchSpans = {};
+
+const searchAnimation = {
+    [0]: () => {
+        searchSpans['s1'].style.opacity = 1;
+        searchSpans['s2'].style.opacity = 0;
+        searchSpans['s3'].style.opacity = 0;
+    },
+    [2]: () => {
+        searchSpans['s1'].style.opacity = 0;
+        searchSpans['s2'].style.opacity = 1;
+        searchSpans['s3'].style.opacity = 0;
+    },
+    [4]: () => {
+        searchSpans['s1'].style.opacity = 0;
+        searchSpans['s2'].style.opacity = 0;
+        searchSpans['s3'].style.opacity = 1;
+    }
+}
+let searchAnimationStart = 0;
+let searchAnimationHandle;
+function searchAnimationRunner() {
+    const duration = (Date.now() - searchAnimationStart) / 1000;
+    const key = Object.keys(searchAnimation).reduce((best, timestamp) => timestamp <= duration ? timestamp : best, undefined)
+    if (key){
+        searchAnimation[key]();
+    }
+
+    if (duration > 6){
+        searchAnimationStart = Date.now();
+    }
+    searchAnimationHandle = requestAnimationFrame(searchAnimationRunner)
+}
+
+function startSearchAnimation(){
+    searchAnimationStart = Date.now()
+    searchAnimationRunner();
+}
+function stopSearchAnimation() {
+    if (searchAnimationHandle){
+        cancelAnimationFrame(searchAnimationHandle);
+    }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('Loaded')
     document.getElementById("go-button").addEventListener('click', onAskQuestion)
     document.getElementById("video-answer").addEventListener('loadeddata', onVideoReady)
 
@@ -106,15 +158,19 @@ window.addEventListener('DOMContentLoaded', () => {
         screens[screen.id] = screen;
         screen.hidden = true;
     }
+
+    for (const searchSpan of document.getElementsByClassName("search")){
+        searchSpans[searchSpan.id] = searchSpan;
+    }
+
     setupBubblesAnimation();
 
     const query = parseUrl()
-    console.log(query);
     if ('q' in query){
         const index = Math.round(Math.random() * 118);
         const fragment = query['a'] ?? `fragment${index}`
         
-        newState({state:"Feeding", question: query['q'], videoFragment: `fragments/${fragment}.mp4`});
+        newState({state:"Feeding", question: formatQuestion(query['q']), videoFragment: `fragments/${fragment}.mp4`});
     } else {
         newState({state:"Question"});
     }

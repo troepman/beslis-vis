@@ -24,7 +24,7 @@
             type="text"
             id="question-field"
             name="question"
-            placeholder="Shall I?"
+            placeholder="Ga ik ... Ja of Nee?"
           />
 
           <div class="go-button-wrapper">
@@ -34,15 +34,18 @@
       </screen>
       <screen id="feeding">
         <div>
-          <span class="search">Finding a fish</span>
-          <span class="search">Feeding your fish</span>
-          <span class="search">Asking your fish</span>
+          <span class="search" id="s1">Vissenkom schoonmaken.</span>
+          <span class="search" id="s2">Vis zoeken..</span>
+          <span class="search" id="s3">Jouw vraag voeren...</span>
         </div>
       </screen>
-      <screen id="answer" class="video-answer-wrapper">
-        <video id="video-answer" muted></video>
-        <div class="video-answer-side no"><span>No</span></div>
-        <div class="video-answer-side yes"><span>Yes</span></div>
+      <screen id="answer">
+        <span class="video-answer-question" id="video-answer-question"></span>
+        <div class="video-answer-wrapper">
+          <video id="video-answer" muted></video>
+          <div class="video-answer-side no"><span>No</span></div>
+          <div class="video-answer-side yes"><span>Yes</span></div>
+        </div>
       </screen>
     </content>
     <div class="bubble"></div>
