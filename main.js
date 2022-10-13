@@ -35,6 +35,7 @@ let applicationState = {
     state: "Question",
     question: null,
     videoFragment: null,
+    videoReady: false
 }
 
 const screens = {}
@@ -47,26 +48,42 @@ function showScreen(name){
     screens[name].style.display = '';
 }
 
-function newState(newState) {
-    switch (newState.state) {
+function onEndOfSearchAnimation() {
+    if (!applicationState.videoReady) {
+        setTimeout(onEndOfSearchAnimation, 500);
+        return;
+    }
+    newState({state:'Answer'})
+}
+
+function newState(modification) {
+    const newState = {...applicationState, ...modification}
+    switch (modification.state) {
         case "Question":
             showScreen("question");
         break;
         case "Feeding":
             showScreen("feeding");
+            const videoElement = document.getElementById('video-answer');
+            videoElement.src = newState.videoFragment
+            videoElement.load();
+            newState.videoReady = false;
+
             setTimeout(() => {
-                document.getElementById('video-answer').src = newState.videoFragment
-                document.getElementById('video-answer').load();
+                onEndOfSearchAnimation();
             }, 6000);
             startSearchAnimation()
+            document.getElementById('feeding-question').innerHTML = newState.question;
         break;
         case "Answer":
             stopSearchAnimation();
             showScreen("answer");
+            document.getElementById('video-answer').play();
+            document.getElementById('video-answer-question').innerText = newState.question;
         break;
 
     }
-    applicationState = newState;
+    applicationState = newState
 }
 
 function formatQuestion(q){
@@ -76,21 +93,21 @@ function formatQuestion(q){
     return q;
 }
 
-function onAskQuestion() {
+function onAskQuestion(ev) {
     const question = formatQuestion(document.getElementById('question-field').value);
     
     index = Math.round(Math.random() * 118);
     newState({state:"Feeding", question, videoFragment: `fragments/fragment${index}.mp4`});
+
+    ev.preventDefault();
 }
 
 function onVideoReady() {
     if (applicationState.state !== 'Feeding') { 
         return;
     }
-    document.getElementById('video-answer').play();
-    document.getElementById('video-answer-question').innerText = applicationState.question;
 
-    newState({state:'Answer', question: applicationState.question, videoFragment: applicationState.videoFragment})
+    newState({videoReady: true})
 }
 
 function parseUrl(){
@@ -151,12 +168,12 @@ function stopSearchAnimation() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("go-button").addEventListener('click', onAskQuestion)
-    document.getElementById("video-answer").addEventListener('loadeddata', onVideoReady)
+    document.getElementById("go-button").addEventListener('click', onAskQuestion);
+    document.getElementById("go-form").addEventListener('submit', onAskQuestion);
+    document.getElementById("video-answer").addEventListener('loadeddata', onVideoReady);
 
     for (const screen of document.getElementsByTagName("screen")){
         screens[screen.id] = screen;
-        screen.hidden = true;
     }
 
     for (const searchSpan of document.getElementsByClassName("search")){

@@ -10,30 +10,40 @@
     />
     <link href="main.css" rel="stylesheet" />
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
     <script type="text/javascript" src="main.js"></script>
   </head>
   <body>
-    <header>
-      <h1>Beslis vis</h1>
+    <header id="header">
+      <a href="/" class="no-style"><h1>Beslis vis</h1></a>
     </header>
     <content>
       <screen id="question">
         <div class="question-line">
-          <input
-            class="text-input"
-            type="text"
-            id="question-field"
-            name="question"
-            placeholder="Ga ik ... Ja of Nee?"
-          />
-
+          <form id="go-form">
+            <input
+              class="text-input"
+              type="text"
+              id="question-field"
+              name="question"
+              placeholder="Ga ik ... Ja of Nee?"
+            />
+          </form>
           <div class="go-button-wrapper">
-            <div class="go-button" id="go-button" name="go-button">>></div>
+            <div class="go button" id="go-button" name="go-button">>></div>
           </div>
         </div>
       </screen>
       <screen id="feeding">
-        <div>
+        <span class="feeding-question" id="feeding-question"></span>
+        <div class="search-wrapper">
           <span class="search" id="s1">Vissenkom schoonmaken.</span>
           <span class="search" id="s2">Vis zoeken..</span>
           <span class="search" id="s3">Jouw vraag voeren...</span>
@@ -43,14 +53,16 @@
         <span class="video-answer-question" id="video-answer-question"></span>
         <div class="video-answer-wrapper">
           <video id="video-answer" muted></video>
-          <div class="video-answer-side no"><span>No</span></div>
-          <div class="video-answer-side yes"><span>Yes</span></div>
+          <div class="video-answer-side no"><span>Nee</span></div>
+          <div class="video-answer-side yes"><span>Ja</span></div>
         </div>
       </screen>
     </content>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+    <div class="bubble-wrapper">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
   </body>
 </html>
