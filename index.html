@@ -26,8 +26,12 @@
     </header>
     <content>
       <screen id="question">
-        <div class="question-line">
-          <form id="go-form">
+        <form id="go-form">
+          <div class="question-intro">
+            <p>Twijfel je tussen Ja of Nee?</p>
+            <p>Denk niet verder maar laat onze goudvis voor je kiezen!</p>
+          </div>
+          <div class="question-line">
             <input
               class="text-input"
               type="text"
@@ -35,11 +39,12 @@
               name="question"
               placeholder="Ga ik ... Ja of Nee?"
             />
-          </form>
-          <div class="go-button-wrapper">
-            <div class="go button" id="go-button" name="go-button">>></div>
+
+            <div class="go-button-wrapper">
+              <div class="go button" id="go-button" name="go-button">>></div>
+            </div>
           </div>
-        </div>
+        </form>
       </screen>
       <screen id="feeding">
         <span class="feeding-question" id="feeding-question"></span>
@@ -56,9 +61,18 @@
           <div class="video-answer-side no"><span>Nee</span></div>
           <div class="video-answer-side yes"><span>Ja</span></div>
         </div>
+        <div>
+          <div class="go-button-wrapper">
+            <div class="back button" id="back-button" name="back-button">
+              << Ask a new question
+            </div>
+          </div>
+        </div>
       </screen>
     </content>
     <div class="bubble-wrapper">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
       <div class="bubble"></div>
       <div class="bubble"></div>
       <div class="bubble"></div>

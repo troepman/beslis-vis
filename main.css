@@ -33,72 +33,84 @@ header {
 }
 content {
     flex: 1 0 70vh;
-    max-width: 80vw;
+    width: 50vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: stretch;
+}
+.question-intro {
+    text-align: center;
+    margin-bottom: 75px;
 }
 
 .question-line {
     display: flex;
     flex-direction: row;
     align-items: center;
+    width:100%;
 }
 
 .text-input {
+    flex: 1 0 auto;
     border: 2px solid gray;
-    min-width: 30vw;
     border-radius: 5px;
     padding: 20px;
     background-color: #efefef;
     color:gray;
     font-family: 'Silkscreen', cursive;
     outline: none;
-    transition: border-color 1s,
-                background-color 2s;
+    transition: border-color 0.3s,
+                background-color 0.3s,
+                box-shadow 0.3s;
+
+    box-shadow:  3px 3px 5px 0px #00000050;
 }
 
 .text-input:focus, .text-input:active {
     background-color: #ffefef;
     border: 2px solid darkgoldenrod;
+    box-shadow: 1px 1px 5px 0px #00000050;
 }
 
 .go-button-wrapper {
-    width: 55px;
     margin-left: 10px;
     
 }
 .go.button {
     letter-spacing: -5pt;
     padding-left: 0px;
+    font-size: 32pt;
+}
+.back.button {
+    padding: 5px;
 }
 .button {
-    width:75px;
+    min-width:75px;
     height: 100%;
     box-sizing: border-box;
     text-align: center;
-    font-size: 32pt;
     color: #3f3f3f;
     cursor: pointer;
     transition: padding 0.3s,
-                letter-spacing 0.2s,
-                left 0.2s,
-                top 0.2s,
-                box-shadow 0.2s;
+                letter-spacing 0.3s,
+                left 0.3s,
+                top 0.3s,
+                box-shadow 0.3s;
     background-color: orange;
-    box-shadow:  3px 3px 5px 0px #00000080;
+    box-shadow:  3px 3px 5px 0px #00000050;
     border-radius: 5px;
     border: 2px solid darkgoldenrod;
     position:relative;
+    left: 0px;
+    top: 0px;
 }
 .go.button:hover {
     padding-left: 10px;
-    letter-spacing:-10pt;
-    
+    letter-spacing:-10pt;   
 }
 .button:hover {
-    box-shadow: 1px 1px 5px 0px #00000080;
+    box-shadow: 1px 1px 5px 0px #00000050;
     top: 2px;
     left: 2px;
 }
@@ -164,6 +176,8 @@ screen#answer {
     border: 5px solid darkgoldenrod;
     background-color: black;
     overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .video-answer-side {
     height:100%;
