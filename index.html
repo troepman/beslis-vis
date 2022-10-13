@@ -27,11 +27,11 @@
     <content>
       <screen id="question">
         <form id="go-form">
-          <div class="question-intro">
-            <p>Twijfel je tussen Ja of Nee?</p>
-            <p>Denk niet verder maar laat onze goudvis voor je kiezen!</p>
-          </div>
-          <div class="question-line">
+          <p class="question-intro">Twijfel je tussen Ja of Nee?</p>
+          <p class="question-intro">
+            Denk niet verder maar laat onze goudvis voor je kiezen!
+          </p>
+          <div class="line vspace">
             <input
               class="text-input"
               type="text"
@@ -39,9 +39,16 @@
               name="question"
               placeholder="Ga ik ... Ja of Nee?"
             />
-
             <div class="go-button-wrapper">
-              <div class="go button" id="go-button" name="go-button">>></div>
+              <div class="go button primary" id="go-button" name="go-button">
+                >>
+              </div>
+            </div>
+          </div>
+          <p class="question-intro">Of... Stel een random vraag</p>
+          <div class="line">
+            <div class="button" id="random-button" name="random-button">
+              Verras me
             </div>
           </div>
         </form>
@@ -65,11 +72,12 @@
             <span>Ja</span>
           </div>
         </div>
-        <div>
-          <div class="go-button-wrapper">
-            <div class="back button" id="back-button" name="back-button">
-              << Stel nieuwe vraag!
-            </div>
+        <div class="line" id="answer-navigate">
+          <div class="button primary" id="back-button" name="back-button">
+            << Stel nieuwe vraag!
+          </div>
+          <div class="button" id="again-button" name="again-button">
+            Andere vis >>
           </div>
         </div>
       </screen>

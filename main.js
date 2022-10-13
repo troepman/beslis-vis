@@ -41,6 +41,8 @@ let applicationState = {
 
 const screens = {}
 
+const randomQuestions = ['Heb ik zin in koffie?', 'Trek ik een korte broek aan?', 'Ga ik uit vanavond?']
+
 function showScreen(name){
     for (const screenName in screens){
         const screen = screens[screenName];
@@ -84,12 +86,12 @@ function newState(modification) {
             document.getElementById('video-answer-question').innerText = newState.question;
             document.getElementById('video-overlay-yes').style.display = 'none';
             document.getElementById('video-overlay-no').style.display = 'none';
-            document.getElementById("back-button").style.display = 'none';
+            document.getElementById('answer-navigate').style.display = 'none';
         break;
         case "Done":
             document.getElementById('video-overlay-yes').style.display = '';
             document.getElementById('video-overlay-no').style.display = '';
-            document.getElementById("back-button").style.display = '';
+            document.getElementById('answer-navigate').style.display = '';
         break;
 
     }
@@ -103,8 +105,12 @@ function formatQuestion(q){
     return q;
 }
 
-function onAskQuestion(ev) {
-    const question = formatQuestion(document.getElementById('question-field').value);
+function onAskQuestion(ev, random=false) {
+    const question = formatQuestion(
+        random 
+        ? randomQuestions[Math.round(Math.random() * (randomQuestions.length - 1))] 
+        : document.getElementById('question-field').value
+    );
     
     index = Math.round(Math.random() * 118);
     newState({state:"Feeding", question, videoFragment: `fragments/fragment${index}.mp4`});
@@ -126,6 +132,11 @@ function onVideoEnded() {
 
 function onGoHome(){
     newState({state:'Question'})
+}
+
+function onAskSameQuestion() {
+    index = Math.round(Math.random() * 118);
+    newState({state:"Feeding", videoFragment: `fragments/fragment${index}.mp4`});
 }
 
 function parseUrl(){
@@ -188,9 +199,11 @@ function stopSearchAnimation() {
 window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("go-button").addEventListener('click', onAskQuestion);
     document.getElementById("go-form").addEventListener('submit', onAskQuestion);
+    document.getElementById("random-button").addEventListener('click', (ev) => onAskQuestion(ev, true))
     document.getElementById("video-answer").addEventListener('loadeddata', onVideoReady);
     document.getElementById('video-answer').addEventListener('ended', onVideoEnded);
     document.getElementById('back-button').addEventListener('click', onGoHome);
+    document.getElementById('again-button').addEventListener('click', onAskSameQuestion);
 
     for (const screen of document.getElementsByTagName("screen")){
         screens[screen.id] = screen;
