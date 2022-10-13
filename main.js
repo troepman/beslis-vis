@@ -35,7 +35,8 @@ let applicationState = {
     state: "Question",
     question: null,
     videoFragment: null,
-    videoReady: false
+    videoReady: false,
+    videoEnded: false,
 }
 
 const screens = {}
@@ -68,6 +69,7 @@ function newState(modification) {
             videoElement.src = newState.videoFragment
             videoElement.load();
             newState.videoReady = false;
+            
 
             setTimeout(() => {
                 onEndOfSearchAnimation();
@@ -80,6 +82,14 @@ function newState(modification) {
             showScreen("answer");
             document.getElementById('video-answer').play();
             document.getElementById('video-answer-question').innerText = newState.question;
+            document.getElementById('video-overlay-yes').style.display = 'none';
+            document.getElementById('video-overlay-no').style.display = 'none';
+            document.getElementById("back-button").style.display = 'none';
+        break;
+        case "Done":
+            document.getElementById('video-overlay-yes').style.display = '';
+            document.getElementById('video-overlay-no').style.display = '';
+            document.getElementById("back-button").style.display = '';
         break;
 
     }
@@ -108,6 +118,14 @@ function onVideoReady() {
     }
 
     newState({videoReady: true})
+}
+
+function onVideoEnded() {
+    newState({state:'Done'})
+}
+
+function onGoHome(){
+    newState({state:'Question'})
 }
 
 function parseUrl(){
@@ -171,6 +189,8 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("go-button").addEventListener('click', onAskQuestion);
     document.getElementById("go-form").addEventListener('submit', onAskQuestion);
     document.getElementById("video-answer").addEventListener('loadeddata', onVideoReady);
+    document.getElementById('video-answer').addEventListener('ended', onVideoEnded);
+    document.getElementById('back-button').addEventListener('click', onGoHome);
 
     for (const screen of document.getElementsByTagName("screen")){
         screens[screen.id] = screen;
