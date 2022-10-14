@@ -10,7 +10,8 @@ body {
     align-items: center;
     background-color: aqua;
     color:orange;
-    height:100vh;
+    /* height: 100vh; */
+    font-size: 20pt;
 }
 a.no-style:link {
     text-decoration: inherit;
@@ -22,7 +23,7 @@ a.no-style:visited {
     color: inherit;
 }
 h1 {
-    font-size: 72pt;
+    font-size: 60pt;
     -webkit-text-stroke: 1px darkgoldenrod;
     text-shadow: 3px 3px #000;
     margin-top: 20px;
@@ -52,7 +53,7 @@ content {
     width: 100%;
 }
 
-.line.vspace{
+.vspace{
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -141,7 +142,7 @@ content {
     border: 1px solid #efefefdf;
     background-color: #efefef7f;
     box-shadow: inset 5px -5px 25px 5px #efefefbf;
-    width:100px;
+    width: 100px;
     height: 100px;
     position: absolute;
 }
@@ -162,7 +163,6 @@ screen#feeding{
     display: block;
     position: absolute;
     transform: translate(-50%, 0); 
-    font-size: 20px;
     transition: opacity 0.5s;
     text-align: center;
 }
@@ -175,15 +175,15 @@ screen#answer {
 
 #video-answer {
     max-height: 50vh;    
+    max-width: 100%;
 }
 .video-answer-question,
 .feeding-question {
-    font-size: 40px;
     margin-bottom: 10px;
 }
 .video-answer-wrapper {
     position:relative;
-    border-radius: 15px 15px 100px 100px;
+    border-radius: 5% 5% 15% 15%;
     border: 5px solid darkgoldenrod;
     background-color: black;
     overflow: hidden;
@@ -200,9 +200,7 @@ screen#answer {
     flex-direction: column;
     align-items: center;
 }
-.video-answer-side span {
-    font-size: 20pt;
-}
+
 .video-answer-side.yes {
     left: 50%;
     background-color: #00ff0060;
@@ -215,3 +213,51 @@ screen#answer {
 }
 
 
+
+@media screen and (max-width: 900px) {
+    body {
+        font-size: 14pt;
+    }
+    h1 {
+        font-size: 30pt;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    h1 {
+        font-size: 30pt;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    body {
+        font-size: 12pt;
+    }
+    p,
+    .question-intro {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .vspace {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    content {
+        width: 90vw;
+    }
+    body {
+        font-size: 12pt;
+    }
+    h1 {
+        font-size: 30pt;
+    }
+    .line {
+        flex-direction: column;
+    }
+    .line .button {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
