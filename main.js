@@ -83,6 +83,11 @@ function newState(modification) {
             stopSearchAnimation();
             showScreen("answer");
             document.getElementById('video-answer').play();
+            setTimeout(() => {
+                if (applicationState.state === 'Answer') { 
+                    onVideoEnded(); 
+                }
+            }, 15100);
             document.getElementById('video-answer-question').innerText = newState.question;
             document.getElementById('video-overlay-yes').style.display = 'none';
             document.getElementById('video-overlay-no').style.display = 'none';
