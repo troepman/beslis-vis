@@ -199,6 +199,7 @@ screen#answer {
     justify-content: flex-end;
     flex-direction: column;
     align-items: center;
+    z-index: 1;
 }
 
 .video-answer-side.yes {
