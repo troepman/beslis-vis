@@ -163,8 +163,11 @@ screen#feeding{
     display: block;
     position: absolute;
     transform: translate(-50%, 0); 
-    transition: opacity 0.5s;
+    
     text-align: center;
+}
+.opacity-fade05{
+    transition: opacity 0.5s;
 }
 
 screen#answer {
@@ -211,6 +214,17 @@ screen#answer {
     left: 0%;
     background-color: #ff000060;
     color: #ff0000;
+}
+.video-answer-divider {
+    left: 50%;
+    z-index: 2;
+    background-color: white;
+    width: 5px;
+    transform: translateX(-2.5px);
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    transition: opacity 5s;
 }
 
 

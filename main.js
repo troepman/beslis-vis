@@ -41,6 +41,8 @@ let applicationState = {
 
 const screens = {}
 
+const NUMBER_OF_FRAGMENTS = 85;
+
 const randomQuestions = ['Heb ik zin in koffie?', 'Trek ik een korte broek aan?', 'Ga ik uit vanavond?']
 
 function showScreen(name){
@@ -91,12 +93,22 @@ function newState(modification) {
             document.getElementById('video-answer-question').innerText = newState.question;
             document.getElementById('video-overlay-yes').style.display = 'none';
             document.getElementById('video-overlay-no').style.display = 'none';
+            document.getElementById('video-overlay-divider').style.opacity = 0;
+            document.getElementById('video-overlay-divider').style.opacity;
             document.getElementById('answer-navigate').style.display = 'none';
+            document.getElementById('video-answer-status').style.display = '';
+            document.getElementById('video-answer-status').style.opacity = 1;
+
+            setTimeout(() => {
+                document.getElementById('video-overlay-divider').style.opacity = 1;
+                document.getElementById('video-answer-status').style.opacity = 0;
+            }, 8000)
         break;
         case "Done":
             document.getElementById('video-overlay-yes').style.display = '';
             document.getElementById('video-overlay-no').style.display = '';
             document.getElementById('answer-navigate').style.display = '';
+            document.getElementById('video-answer-status').style.display = 'None';
         break;
 
     }
@@ -117,7 +129,7 @@ function onAskQuestion(ev, random=false) {
         : document.getElementById('question-field').value
     );
     
-    index = Math.round(Math.random() * 118);
+    index = Math.floor(Math.random() * NUMBER_OF_FRAGMENTS);
     newState({state:"Feeding", question, videoFragment: `fragments/fragment${index}.mp4`});
 
     ev.preventDefault();
@@ -140,7 +152,7 @@ function onGoHome(){
 }
 
 function onAskSameQuestion() {
-    index = Math.round(Math.random() * 118);
+    index = Math.floor(Math.random() * NUMBER_OF_FRAGMENTS);
     newState({state:"Feeding", videoFragment: `fragments/fragment${index}.mp4`});
 }
 
