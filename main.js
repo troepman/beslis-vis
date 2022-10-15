@@ -116,6 +116,7 @@ function newState(modification) {
 }
 
 function formatQuestion(q){
+    q = q.trim();
     if (!q.endsWith('?')){
         q += '?'
     }
