@@ -1,0 +1,43 @@
+{
+    "name": "beslis-vis",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start": "concurrently --kill-others \"npm run start:web\" \"npm run start:emulators\"",
+        "start:web": "cd web && yarn start",
+        "start:functions": "cd functions && yarn build:watch",
+        "start:emulators": "yarn firebase emulators:start --import=./emulator_data --export-on-exit=./emulator_data",
+        "build:web": "cd web && yarn run build",
+        "lint": "eslint .",
+        "deploy": "firebase deploy"
+    },
+    "private": true,
+    "workspaces": [
+        "web"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/troepman/beslis-vis.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/troepman/beslis-vis/issues"
+    },
+    "homepage": "https://github.com/troepman/beslis-vis#readme",
+    "dependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.40.0",
+        "@typescript-eslint/parser": "^5.40.0",
+        "concurrently": "^7.4.0",
+        "eslint": "^8.25.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "firebase": "^9.12.1",
+        "firebase-admin": "^11.1.0",
+        "firebase-tools": "^11.14.4",
+        "prettier": "^2.7.1",
+        "typescript": "^4.8.4"
+    }
+}

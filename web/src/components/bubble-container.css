@@ -1,0 +1,19 @@
+.bubble-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  .bubble {
+    border-radius: 100%;
+    border: 1px solid #efefefdf;
+    background-color: #efefef7f;
+    box-shadow: inset 5px -5px 25px 5px #efefefbf;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+  }
