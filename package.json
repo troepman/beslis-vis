@@ -10,7 +10,8 @@
         "start:emulators": "yarn firebase emulators:start --import=./emulator_data --export-on-exit=./emulator_data",
         "build:web": "cd web && yarn run build",
         "lint": "eslint .",
-        "deploy": "firebase deploy"
+        "deploy": "firebase deploy",
+        "ci": "Echo \"Nothing to test\" && exit 0"
     },
     "private": true,
     "workspaces": [
