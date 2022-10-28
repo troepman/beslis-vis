@@ -11,7 +11,7 @@
         "build:web": "cd web && yarn run build",
         "lint": "eslint .",
         "deploy": "firebase deploy",
-        "ci": "Echo \"Nothing to test\" && exit 0"
+        "ci": "echo \"Nothing to test\" && exit 0"
     },
     "private": true,
     "workspaces": [
