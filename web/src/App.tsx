@@ -5,7 +5,6 @@ import BubbleContainer from './components/bubble-container';
 import ReactGA from 'react-ga';
 const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 function formatQuestion(q: string) {
     q = q.trim();
@@ -82,6 +81,10 @@ function App() {
             state: 'Question',
         }));
     }, [setAppState]);
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search);
+    }, []);
 
     useEffect(() => {
         if (appState.state === 'Loading' && videoRef.current) {
