@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import Screen from './components/screen';
 import BubbleContainer from './components/bubble-container';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
@@ -83,7 +83,7 @@ function App() {
     }, [setAppState]);
 
     useEffect(() => {
-        ReactGA.pageview(window.location.pathname + window.location.search);
+        ReactGA.send('pageview');
     }, []);
 
     useEffect(() => {
