@@ -4,6 +4,7 @@ import Screen from './components/screen';
 import BubbleContainer from './components/bubble-container';
 import ReactGA from 'react-ga4';
 import queryString from 'query-string';
+import Button from './components/button';
 
 const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
@@ -181,21 +182,13 @@ function App() {
                                 value={appState.question}
                                 onChange={(ev) => setAppState((c) => ({ ...c, question: ev.target.value }))}
                             />
-                            <div className="go-button-wrapper">
-                                <div
-                                    className="go button primary"
-                                    id="go-button"
-                                    onClick={() => submitQuestion(appState.question)}
-                                >
-                                    {'>>'}
-                                </div>
-                            </div>
+                            <Button primary className="go" onClick={() => submitQuestion}>
+                                {'>>'}
+                            </Button>
                         </div>
                         <p className="question-intro">Of... Stel een random vraag</p>
                         <div className="line vspace">
-                            <div className="button" id="random-button" onClick={() => submitQuestion()}>
-                                Verras me
-                            </div>
+                            <Button onClick={() => submitQuestion()}>Verras me</Button>
                         </div>
                     </form>
                 </Screen>
@@ -261,12 +254,10 @@ function App() {
                     )}
                     {appState.state === 'Done' && (
                         <div className="line" id="answer-navigate">
-                            <div className="button primary" id="back-button" onClick={onNewQuestion}>
-                                {'<< Stel nieuwe vraag!'}
-                            </div>
-                            <div className="button" id="again-button" onClick={onDifferentFish}>
-                                Andere vis {'>>'}
-                            </div>
+                            <Button primary onClick={onNewQuestion}>
+                                {'<<'} Stel nieuwe vraag!
+                            </Button>
+                            <Button onClick={onDifferentFish}>Andere vis {'>>'}</Button>
                         </div>
                     )}
                 </Screen>

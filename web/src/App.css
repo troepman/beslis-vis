@@ -84,41 +84,6 @@ content {
   box-shadow: 1px 1px 5px 0px #00000050;
 }
 
-.go-button-wrapper {
-  margin-left: 10px;
-  
-}
-
-.button {
-  min-width:75px;
-  height: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  color: #3f3f3f;
-  cursor: pointer;
-  transition: padding 0.3s,
-              letter-spacing 0.3s,
-              left 0.3s,
-              top 0.3s,
-              box-shadow 0.3s;
-  background-color: #efefef;
-  box-shadow:  3px 3px 5px 0px #00000050;
-  border-radius: 5px;
-  border: 2px solid gray;
-  position:relative;
-  left: 0px;
-  top: 0px;
-  padding: 5px;
-}
-.button.primary {
-  background-color: orange;
-  border-color: darkgoldenrod;
-}
-.button:hover {
-  box-shadow: 1px 1px 5px 0px #00000050;
-  top: 2px;
-  left: 2px;
-}
 .go.button {
   letter-spacing: -5pt;
   padding: 0px;
