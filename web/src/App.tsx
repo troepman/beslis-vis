@@ -184,7 +184,7 @@ function App() {
                                 value={appState.question}
                                 onChange={(ev) => setAppState((c) => ({ ...c, question: ev.target.value }))}
                             />
-                            <Button primary className="go" onClick={() => submitQuestion}>
+                            <Button primary className="go" onClick={() => submitQuestion(appState.question)}>
                                 {'>>'}
                             </Button>
                         </div>
