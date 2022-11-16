@@ -85,6 +85,8 @@ function App() {
     const onNewQuestion = React.useCallback(() => {
         setAppState((c) => ({
             ...c,
+            question: '',
+            videoFragment: '',
             state: 'Question',
         }));
     }, [setAppState]);
@@ -132,7 +134,6 @@ function App() {
     }, [appState.state]);
 
     useEffect(() => {
-        console.log(appState);
         if (appState.feedingAnimation > 2) {
             setAppState((c) => ({ ...c, state: 'Swimming' }));
         }
