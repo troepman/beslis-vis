@@ -2,8 +2,12 @@ import * as React from 'react';
 import Button from './button';
 import whatsAppImg from './whatsapp.png';
 
-export default function ShareButtons(props: { question: string; url: string }): JSX.Element {
-    const standardText = 'Ik vroeg me af ' + props.question + ' en dit zei de vis: ' + props.url;
+export default function ShareButtons(props: {
+    question: string;
+    url: string;
+    onShare: (medium: string) => void;
+}): JSX.Element {
+    const standardText = "Ik vroeg me af '" + props.question + "' en dit zei de vis: " + props.url;
     const defaultStyle = { minWidth: 'unset', width: 48 };
     const whatsAppStyle = { ...defaultStyle, backgroundColor: '#25D366' };
 
@@ -14,6 +18,7 @@ export default function ShareButtons(props: { question: string; url: string }): 
         >
             <Button
                 onClick={() => {
+                    props.onShare('copy');
                     navigator.clipboard.writeText(standardText);
                 }}
                 styles={{
@@ -25,6 +30,7 @@ export default function ShareButtons(props: { question: string; url: string }): 
             <Button
                 className="only-mobile"
                 onClick={() => {
+                    props.onShare('whatsapp_mobile');
                     window.open('whatsapp://send?text=' + encodeURIComponent(standardText), '_blank')?.focus();
                 }}
                 styles={{ button: whatsAppStyle }}
@@ -34,6 +40,7 @@ export default function ShareButtons(props: { question: string; url: string }): 
             <Button
                 className="hide-mobile"
                 onClick={() => {
+                    props.onShare('whatsapp_web');
                     window
                         .open('https://web.whatsapp.com/send?text=' + encodeURIComponent(standardText), '_blank')
                         ?.focus();

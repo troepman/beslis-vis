@@ -10,6 +10,15 @@ import ShareButtons from './components/share-buttons';
 const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
+function trackEvent(category: string, action: string, label: string) {
+    console.log(`GA - ${category}: ${action} - ${label}`);
+    ReactGA.event({
+        category,
+        action,
+        label,
+    });
+}
+
 function formatQuestion(q: string) {
     q = q.trim();
     if (!q.endsWith('?')) {
@@ -63,6 +72,11 @@ function App() {
                 videoFragment: formatVideoFragment(),
                 videoReady: false,
             }));
+            if (q) {
+                trackEvent('navigation', 'submit_question', 'personal');
+            } else {
+                trackEvent('navigation', 'submit_question', 'random');
+            }
         },
         [setAppState],
     );
@@ -96,6 +110,7 @@ function App() {
      */
     useEffect(() => {
         const query = queryString.parse(location.search);
+        console.log(query, location);
         if ('q' in query) {
             const question = formatQuestion(query['q'] as string);
             const fragment = formatVideoFragment(query['a'] as string | undefined);
@@ -107,9 +122,9 @@ function App() {
                 videoFragment: fragment,
                 videoReady: false,
             }));
-            ReactGA.send('pageview_fromurl');
+            trackEvent('navigation', 'website_load', 'with_question');
         } else {
-            ReactGA.send('pageview');
+            trackEvent('navigation', 'website_load', 'no_question');
         }
     }, []);
 
@@ -266,7 +281,13 @@ function App() {
                                     </Button>
                                 </div>
                                 <span>Deel: </span>
-                                <ShareButtons question={appState.question} url={window.location.href} />
+                                <ShareButtons
+                                    question={appState.question}
+                                    url={window.location.href}
+                                    onShare={(medium) => {
+                                        trackEvent('navigation', 'share', medium);
+                                    }}
+                                />
                             </div>
                         </>
                     )}
