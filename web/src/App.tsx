@@ -3,6 +3,10 @@ import './App.css';
 import Screen from './components/screen';
 import BubbleContainer from './components/bubble-container';
 import ReactGA from 'react-ga4';
+import queryString from 'query-string';
+import Button from './components/button';
+import ShareButtons from './components/share-buttons';
+
 const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
@@ -19,13 +23,16 @@ function generateRandomQuestion(): string {
     return randomQuestions[Math.round(Math.random() * (randomQuestions.length - 1))];
 }
 
-function formatVideoUrl(fragment?: string) {
-    if (fragment) {
-        return `fragments/${fragment}.mp4`;
+function formatVideoFragment(fragment?: string) {
+    if (fragment && /^fragment[0-9]+$/.test(fragment)) {
+        return fragment;
     } else {
         const n = Math.floor(85 * Math.random());
-        return `fragments/fragment${n}.mp4`;
+        return `fragment${n}`;
     }
+}
+function formatVideoUrl(fragment: string) {
+    return `fragments/${fragment}.mp4`;
 }
 
 function App() {
@@ -53,7 +60,7 @@ function App() {
                 question,
                 state: 'Loading',
                 feedingAnimation: 0,
-                videoFragment: formatVideoUrl(),
+                videoFragment: formatVideoFragment(),
                 videoReady: false,
             }));
         },
@@ -70,7 +77,7 @@ function App() {
             ...c,
             state: 'Loading',
             feedingAnimation: 0,
-            videoFragment: formatVideoUrl(),
+            videoFragment: formatVideoFragment(),
             videoReady: false,
         }));
     }, [setAppState]);
@@ -78,17 +85,37 @@ function App() {
     const onNewQuestion = React.useCallback(() => {
         setAppState((c) => ({
             ...c,
+            question: '',
+            videoFragment: '',
             state: 'Question',
         }));
     }, [setAppState]);
 
+    /**
+     * On app start up
+     */
     useEffect(() => {
-        ReactGA.send('pageview');
+        const query = queryString.parse(location.search);
+        if ('q' in query) {
+            const question = formatQuestion(query['q'] as string);
+            const fragment = formatVideoFragment(query['a'] as string | undefined);
+            setAppState((c) => ({
+                ...c,
+                state: 'Loading',
+                question,
+                feedingAnimation: 0,
+                videoFragment: fragment,
+                videoReady: false,
+            }));
+            ReactGA.send('pageview_fromurl');
+        } else {
+            ReactGA.send('pageview');
+        }
     }, []);
 
     useEffect(() => {
         if (appState.state === 'Loading' && videoRef.current) {
-            videoRef.current.src = appState.videoFragment;
+            videoRef.current.src = formatVideoUrl(appState.videoFragment);
             videoRef.current.load();
             const handle = setInterval(
                 () =>
@@ -107,7 +134,6 @@ function App() {
     }, [appState.state]);
 
     useEffect(() => {
-        console.log(appState);
         if (appState.feedingAnimation > 2) {
             setAppState((c) => ({ ...c, state: 'Swimming' }));
         }
@@ -118,6 +144,17 @@ function App() {
             videoRef.current.addEventListener('load', () => setAppState((c) => ({ ...c, videoReady: true })));
         }
     }, [videoRef.current]);
+
+    useEffect(() => {
+        const q = [];
+        if (appState.question) {
+            q.push('q=' + encodeURIComponent(appState.question));
+        }
+        if (appState.videoFragment) {
+            q.push('a=' + encodeURIComponent(appState.videoFragment));
+        }
+        window.history.replaceState(null, '', '?' + q.join('&'));
+    }, [appState.question, appState.videoFragment]);
 
     return (
         <div className="App">
@@ -147,21 +184,13 @@ function App() {
                                 value={appState.question}
                                 onChange={(ev) => setAppState((c) => ({ ...c, question: ev.target.value }))}
                             />
-                            <div className="go-button-wrapper">
-                                <div
-                                    className="go button primary"
-                                    id="go-button"
-                                    onClick={() => submitQuestion(appState.question)}
-                                >
-                                    {'>>'}
-                                </div>
-                            </div>
+                            <Button primary className="go" onClick={() => submitQuestion}>
+                                {'>>'}
+                            </Button>
                         </div>
                         <p className="question-intro">Of... Stel een random vraag</p>
                         <div className="line vspace">
-                            <div className="button" id="random-button" onClick={() => submitQuestion()}>
-                                Verras me
-                            </div>
+                            <Button onClick={() => submitQuestion()}>Verras me</Button>
                         </div>
                     </form>
                 </Screen>
@@ -221,19 +250,25 @@ function App() {
                         </div>
                     </div>
                     {appState.state === 'Swimming' && (
-                        <span id="video-answer-status" className="opacity-fade05">
+                        <span className="text-align-center opacity-fade05">
                             Verteren van de vraag, dit kost tijd...
                         </span>
                     )}
                     {appState.state === 'Done' && (
-                        <div className="line" id="answer-navigate">
-                            <div className="button primary" id="back-button" onClick={onNewQuestion}>
-                                {'<< Stel nieuwe vraag!'}
+                        <>
+                            <div className="line">
+                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
+                                    <Button primary onClick={onNewQuestion}>
+                                        {'<<'}
+                                    </Button>
+                                    <Button onClick={onDifferentFish}>
+                                        <span className="material-symbols-outlined">refresh</span>
+                                    </Button>
+                                </div>
+                                <span>Deel: </span>
+                                <ShareButtons question={appState.question} url={window.location.href} />
                             </div>
-                            <div className="button" id="again-button" onClick={onDifferentFish}>
-                                Andere vis {'>>'}
-                            </div>
-                        </div>
+                        </>
                     )}
                 </Screen>
             </div>
