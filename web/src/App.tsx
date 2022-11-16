@@ -5,6 +5,7 @@ import BubbleContainer from './components/bubble-container';
 import ReactGA from 'react-ga4';
 import queryString from 'query-string';
 import Button from './components/button';
+import ShareButtons from './components/share-buttons';
 
 const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
@@ -248,17 +249,25 @@ function App() {
                         </div>
                     </div>
                     {appState.state === 'Swimming' && (
-                        <span id="video-answer-status" className="opacity-fade05">
+                        <span className="text-align-center opacity-fade05">
                             Verteren van de vraag, dit kost tijd...
                         </span>
                     )}
                     {appState.state === 'Done' && (
-                        <div className="line" id="answer-navigate">
-                            <Button primary onClick={onNewQuestion}>
-                                {'<<'} Stel nieuwe vraag!
-                            </Button>
-                            <Button onClick={onDifferentFish}>Andere vis {'>>'}</Button>
-                        </div>
+                        <>
+                            <div className="line">
+                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
+                                    <Button primary onClick={onNewQuestion}>
+                                        {'<<'}
+                                    </Button>
+                                    <Button onClick={onDifferentFish}>
+                                        <span className="material-symbols-outlined">refresh</span>
+                                    </Button>
+                                </div>
+                                <span>Deel: </span>
+                                <ShareButtons question={appState.question} url={window.location.href} />
+                            </div>
+                        </>
                     )}
                 </Screen>
             </div>
