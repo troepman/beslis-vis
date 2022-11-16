@@ -2,22 +2,11 @@ import React, { useEffect } from 'react';
 import './App.css';
 import Screen from './components/screen';
 import BubbleContainer from './components/bubble-container';
-import ReactGA from 'react-ga4';
+
 import queryString from 'query-string';
 import Button from './components/button';
 import ShareButtons from './components/share-buttons';
-
-const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
-
-function trackEvent(category: string, action: string, label: string) {
-    console.log(`GA - ${category}: ${action} - ${label}`);
-    ReactGA.event({
-        category,
-        action,
-        label,
-    });
-}
+import GoogleAnalyticEvents from './services/ga4';
 
 function formatQuestion(q: string) {
     q = q.trim();
@@ -73,9 +62,9 @@ function App() {
                 videoReady: false,
             }));
             if (q) {
-                trackEvent('navigation', 'submit_question', 'personal');
+                GoogleAnalyticEvents.navigation.submitQuestion('personal');
             } else {
-                trackEvent('navigation', 'submit_question', 'random');
+                GoogleAnalyticEvents.navigation.submitQuestion('random');
             }
         },
         [setAppState],
@@ -122,9 +111,9 @@ function App() {
                 videoFragment: fragment,
                 videoReady: false,
             }));
-            trackEvent('navigation', 'website_load', 'with_question');
+            GoogleAnalyticEvents.navigation.websiteLoad('with_question');
         } else {
-            trackEvent('navigation', 'website_load', 'no_question');
+            GoogleAnalyticEvents.navigation.websiteLoad('no_question');
         }
     }, []);
 
@@ -144,7 +133,11 @@ function App() {
         }
         if (appState.state === 'Swimming' && videoRef.current) {
             videoRef.current.play();
-            setTimeout(() => setAppState((c) => ({ ...c, state: 'Done' })), 15000);
+            GoogleAnalyticEvents.navigation.fishAnsweredStarted();
+            setTimeout(() => {
+                setAppState((c) => ({ ...c, state: 'Done' }));
+                GoogleAnalyticEvents.navigation.fishAnsweredFinished();
+            }, 15000);
         }
     }, [appState.state]);
 
@@ -281,13 +274,7 @@ function App() {
                                     </Button>
                                 </div>
                                 <span>Deel: </span>
-                                <ShareButtons
-                                    question={appState.question}
-                                    url={window.location.href}
-                                    onShare={(medium) => {
-                                        trackEvent('navigation', 'share', medium);
-                                    }}
-                                />
+                                <ShareButtons question={appState.question} url={window.location.href} />
                             </div>
                         </>
                     )}
