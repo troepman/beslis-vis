@@ -2,13 +2,11 @@ import React, { useEffect } from 'react';
 import './App.css';
 import Screen from './components/screen';
 import BubbleContainer from './components/bubble-container';
-import ReactGA from 'react-ga4';
+
 import queryString from 'query-string';
 import Button from './components/button';
 import ShareButtons from './components/share-buttons';
-
-const TRACKING_ID = 'G-W9K19P5Q0Z'; // OUR_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
+import GoogleAnalyticEvents from './services/ga4';
 
 function formatQuestion(q: string) {
     q = q.trim();
@@ -63,6 +61,11 @@ function App() {
                 videoFragment: formatVideoFragment(),
                 videoReady: false,
             }));
+            if (q) {
+                GoogleAnalyticEvents.navigation.submitQuestion('personal');
+            } else {
+                GoogleAnalyticEvents.navigation.submitQuestion('random');
+            }
         },
         [setAppState],
     );
@@ -96,6 +99,7 @@ function App() {
      */
     useEffect(() => {
         const query = queryString.parse(location.search);
+        console.log(query, location);
         if ('q' in query) {
             const question = formatQuestion(query['q'] as string);
             const fragment = formatVideoFragment(query['a'] as string | undefined);
@@ -107,9 +111,9 @@ function App() {
                 videoFragment: fragment,
                 videoReady: false,
             }));
-            ReactGA.send('pageview_fromurl');
+            GoogleAnalyticEvents.navigation.websiteLoad('with_question');
         } else {
-            ReactGA.send('pageview');
+            GoogleAnalyticEvents.navigation.websiteLoad('no_question');
         }
     }, []);
 
@@ -129,7 +133,11 @@ function App() {
         }
         if (appState.state === 'Swimming' && videoRef.current) {
             videoRef.current.play();
-            setTimeout(() => setAppState((c) => ({ ...c, state: 'Done' })), 15000);
+            GoogleAnalyticEvents.navigation.fishAnsweredStarted();
+            setTimeout(() => {
+                setAppState((c) => ({ ...c, state: 'Done' }));
+                GoogleAnalyticEvents.navigation.fishAnsweredFinished();
+            }, 15000);
         }
     }, [appState.state]);
 
