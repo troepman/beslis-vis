@@ -91,6 +91,7 @@ content {
   padding: 0px;
   padding-left: 0px;
   font-size: 32pt;
+  height: 60px;
 }
 .go.button:hover {
   padding-left: 10px;
