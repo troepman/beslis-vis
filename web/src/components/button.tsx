@@ -2,7 +2,7 @@ import * as React from 'react';
 import './button.css';
 
 export default function Button(props: {
-    onClick: () => void;
+    onClick: React.DOMAttributes<HTMLDivElement>['onClick'];
     className?: string;
     primary?: true;
     children: React.ReactNode;

@@ -3,8 +3,14 @@ import GoogleAnalyticEvents from '../services/ga4';
 import Button from './button';
 import whatsAppImg from './whatsapp.png';
 
-export default function ShareButtons(props: { question: string; url: string }): JSX.Element {
-    const standardText = "Ik vroeg me af '" + props.question + "' en dit zei de vis: " + props.url;
+function formatShareUrl() {
+    const url = location.href + '&utm_source=share';
+    return encodeURI(url);
+}
+
+export default function ShareButtons(props: { question: string; answer: string }): JSX.Element {
+    const url = formatShareUrl();
+    const standardText = "Ik vroeg me af '" + props.question + "' en dit zei de vis: " + url;
     const defaultStyle = { minWidth: 'unset', width: 48 };
     const whatsAppStyle = { ...defaultStyle, backgroundColor: '#25D366' };
 

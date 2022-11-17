@@ -1,0 +1,76 @@
+.answer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.answer-status-container {
+    position: relative;
+    align-self: stretch;
+    min-width: 50vw;
+}
+.answer-status-container>* {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+}
+
+.answer-video {
+    max-height: 50vh;    
+    max-width: 100%;
+  }
+.answer-video-wrapper {
+    position:relative;
+    border-radius: 5% 5% 15% 15%;
+    border: 5px solid darkgoldenrod;
+    background-color: black;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.answer-video-hider {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: black;
+    z-index: 1;
+    transition: opacity 2s;
+}
+.answer-video-side {
+    height:100%;
+    width: 50%;
+    top: 0;
+    position:absolute;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .answer-video-side.yes {
+    left: 50%;
+    background-color: #00ff0060;
+    color: #00ff00;
+  }
+  .answer-video-side.no {
+    left: 0%;
+    background-color: #ff000060;
+    color: #ff0000;
+  }
+  .answer-video-divider {
+    left: 50%;
+    z-index: 2;
+    background-color: white;
+    width: 5px;
+    transform: translateX(-2.5px);
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    transition: opacity 5s;
+  }
+  .no-transition {
+    transition: none !important;
+  }
+  
