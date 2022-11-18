@@ -19,6 +19,12 @@ a.no-style:visited {
   text-decoration: inherit;
   color: inherit;
 }
+a.no-style {
+  transition: color 0.3s;
+}
+a.no-style:hover {
+  color: darkgoldenrod;
+}
 
 
 .App {
