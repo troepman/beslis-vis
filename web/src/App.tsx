@@ -18,6 +18,11 @@ function App() {
     return (
         <div className="App">
             <header className={['header', isHome ? 'home' : ''].join(' ')}>
+                <div className={['back-button', isHome ? 'hidden' : ''].join(' ')}>
+                    <Link to="/" className="no-style">
+                        <span className="material-symbols-outlined">arrow_back</span>
+                    </Link>
+                </div>
                 <Link to="/" className="no-style">
                     <span className={['title', isHome ? 'large' : ''].join(' ')}>Beslis vis</span>
                 </Link>

@@ -30,6 +30,8 @@ a.no-style:visited {
 }
 
 header {
+  padding-left: 25px;
+  padding-right: 25px;
   flex: auto 0 0;
   align-self: stretch;
   text-align: center;
@@ -53,7 +55,23 @@ header:not(.home) {
 .title.large {
   font-size: 60pt;
 }
-
+.back-button {
+  margin-top: 13px;
+  margin-bottom: auto;
+  float: left;
+  transition:
+    opacity 0.5s;
+}
+.back-button.hidden {
+  opacity: 0;
+}
+.back-button:hover span {
+  transition: 
+    color 0.3s;
+}
+.back-button:hover span {
+  color: darkgoldenrod;
+}
 .content {
   flex: 1 0 auto;
   display: flex;
@@ -122,8 +140,8 @@ header:not(.home) {
 }
 
 @media screen and (max-width: 600px) {
-  content {
-      width: 90vw;
+  header {
+    padding-left: 5px;
   }
   body {
       font-size: 12pt;
