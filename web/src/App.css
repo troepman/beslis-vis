@@ -19,15 +19,43 @@ a.no-style:visited {
   text-decoration: inherit;
   color: inherit;
 }
-h1 {
-  font-size: 60pt;
+
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+}
+
+header {
+  flex: auto 0 0;
+  align-self: stretch;
+  text-align: center;
+  padding-bottom: 5px;
+  transition: background-color 0.5s,
+    box-shadow 0.5s;
+}
+header:not(.home) {
+  
+  background-color: #005b5b;
+  box-shadow: 1px 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.title {
+  font-size: 30pt;
   -webkit-text-stroke: 1px darkgoldenrod;
   text-shadow: 3px 3px #000;
   margin-top: 10px;
   margin-bottom: 10px;
+  transition: font-size 0.5s;
+}
+.title.large {
+  font-size: 60pt;
 }
 
-.App {
+.content {
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,19 +63,9 @@ h1 {
   margin-left: 5px;
   margin-right: 5px;
 }
-
-
-header {
-  flex: auto 0 0;
-}
-.content {
+.content>div{
   flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: stretch;
 }
-
 
 .line {
   display: flex;
@@ -76,16 +94,19 @@ header {
   body {
       font-size: 14pt;
   }
-  h1 {
+  .title {
       font-size: 30pt;
   }
 }
 
 @media screen and (max-height: 600px) {
-  h1 {
-      font-size: 30pt;
+  .title {
+      font-size: 20pt;
       margin-top: 5px;
       margin-bottom: 5px;
+  }
+  .title.large {
+    font-size: 30pt;
   }
   body {
       font-size: 12pt;
@@ -95,8 +116,8 @@ header {
       margin-top: 5px;
   }
   .vspace {
-      margin-bottom: 20px;
-      margin-top: 20px;
+      margin-bottom: 10px;
+      margin-top: 10px;
   }
 }
 
@@ -107,8 +128,11 @@ header {
   body {
       font-size: 12pt;
   }
-  h1 {
-      font-size: 30pt;
+  .title {
+      font-size: 20pt;
+  }
+  .title.large {
+    font-size: 30pt;
   }
   .line {
       flex-direction: column;

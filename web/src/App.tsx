@@ -14,11 +14,12 @@ function App() {
             GoogleAnalyticEvents.navigation.websiteLoad('no_question');
         }
     }, []);
+    const isHome = location.pathname === '/';
     return (
         <div className="App">
-            <header id="header">
+            <header className={['header', isHome ? 'home' : ''].join(' ')}>
                 <Link to="/" className="no-style">
-                    <h1>Beslis vis</h1>
+                    <span className={['title', isHome ? 'large' : ''].join(' ')}>Beslis vis</span>
                 </Link>
             </header>
             <div className="content">
