@@ -63,6 +63,7 @@ export default function AnswerPage() {
         setState({ state: 'Loading', videoReady: false, animationTime: 0 });
         GoogleAnalyticEvents.navigation.fishAnsweredStarted();
         const interval = setInterval(() => {
+            videoRef.current?.load();
             setState((c) => {
                 switch (c.state) {
                     case 'Loading':

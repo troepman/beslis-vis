@@ -64,7 +64,9 @@ header {
 
 
 .opacity-fade05{
-  transition: opacity 0.5s;
+  transition: opacity 0.5s,
+    -moz-opacity 0.5s,
+    -webkit-opacity 0.5s;
 }
 
 
