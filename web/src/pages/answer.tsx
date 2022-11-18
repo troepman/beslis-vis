@@ -62,8 +62,8 @@ export default function AnswerPage() {
         // reset animation state
         setState({ state: 'Loading', videoReady: false, animationTime: 0 });
         GoogleAnalyticEvents.navigation.fishAnsweredStarted();
+        videoRef.current?.load();
         const interval = setInterval(() => {
-            videoRef.current?.load();
             setState((c) => {
                 switch (c.state) {
                     case 'Loading':
