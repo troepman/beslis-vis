@@ -116,28 +116,43 @@ export default function AnswerPage() {
                 <video className="answer-video" ref={videoRef} muted onLoadedData={onVideoReady} src={videoUrl}></video>
                 <div
                     className={['answer-video-hider', state.state === 'Loading' ? 'no-transition' : ''].join(' ')}
-                    style={{ opacity: opacities.videoHider }}
+                    style={{ opacity: opacities.videoHider, MozOpacity: opacities.videoDivider }}
                 ></div>
-                <div className="answer-video-side no" style={{ opacity: opacities.videoSides }}>
+                <div
+                    className="answer-video-side no"
+                    style={{ opacity: opacities.videoSides, MozOpacity: opacities.videoSides }}
+                >
                     <span>Nee</span>
                 </div>
                 <div
                     className={['answer-video-divider', state.state === 'Loading' ? 'no-transition' : ''].join(' ')}
-                    style={{ opacity: opacities.videoDivider }}
+                    style={{ opacity: opacities.videoDivider, MozOpacity: opacities.videoDivider }}
                 ></div>
-                <div className="answer-video-side yes" style={{ opacity: opacities.videoSides }}>
+                <div
+                    className="answer-video-side yes"
+                    style={{ opacity: opacities.videoSides, MozOpacity: opacities.videoSides }}
+                >
                     <span>Ja</span>
                 </div>
             </div>
             {state.state !== 'Done' && (
                 <div className="answer-status-container">
-                    <span className="text-align-center opacity-fade05" style={{ opacity: opacities.searching }}>
+                    <span
+                        className="text-align-center opacity-fade05"
+                        style={{ opacity: opacities.searching, MozOpacity: opacities.searching }}
+                    >
                         Schoonmaken van de vissen kom.
                     </span>
-                    <span className="text-align-center opacity-fade05" style={{ opacity: opacities.feeding }}>
+                    <span
+                        className="text-align-center opacity-fade05"
+                        style={{ opacity: opacities.feeding, MozOpacity: opacities.feeding }}
+                    >
                         Voeren van jouw vraag..
                     </span>
-                    <span className="text-align-center opacity-fade05" style={{ opacity: opacities.digesting }}>
+                    <span
+                        className="text-align-center opacity-fade05"
+                        style={{ opacity: opacities.digesting, MozOpacity: opacities.digesting }}
+                    >
                         Verteren van de vraag, dit kost tijd...
                     </span>
                 </div>
