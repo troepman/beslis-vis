@@ -29,8 +29,10 @@ function generateRandomFragment() {
 export async function answerLoader({ request }: LoaderFunctionArgs) {
     const url = new URL(request.url);
     console.log(request);
-    const q = url.searchParams.get('q');
-    const a = formatVideoFragment(url.searchParams.get('a'));
+    const qRaw = url.searchParams.get('q');
+    const aRaw = url.searchParams.get('a');
+    const q = qRaw ? decodeURIComponent(qRaw) : null;
+    const a = aRaw ? formatVideoFragment(decodeURIComponent(aRaw)) : null;
 
     if (!q) {
         return redirect('/');
