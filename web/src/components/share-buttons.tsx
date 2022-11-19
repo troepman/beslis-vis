@@ -5,7 +5,7 @@ import whatsAppImg from './whatsapp.png';
 
 function formatShareUrl() {
     const url = location.href + '&utm_source=share';
-    return encodeURI(url);
+    return url;
 }
 
 export default function ShareButtons(props: { question: string; answer: string }): JSX.Element {
