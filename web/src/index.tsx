@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/home';
 import AnswerPage, { answerLoader } from './pages/answer';
 import AboutPage from './pages/about';
+import FAQPage from './pages/faq';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
             { index: true, element: <HomePage /> },
             { path: 'answer', element: <AnswerPage />, loader: answerLoader },
             { path: 'about', element: <AboutPage /> },
+            { path: 'faq', element: <FAQPage /> },
         ],
     },
 ]);

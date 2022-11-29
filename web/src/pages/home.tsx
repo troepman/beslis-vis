@@ -90,6 +90,8 @@ export default function HomePage() {
                 <Link to="/faq" className="no-style">
                     Fishy Asked Question (FAQ)
                 </Link>
+                <span className="hspacer">|</span>
+                <span>&#169;TJG Roepman</span>
             </div>
         </>
     );
