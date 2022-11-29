@@ -8,7 +8,7 @@ export default function AboutPage() {
             <div className="about-presentation-container">
                 <div className="about-presentation-text">
                     <h1>About</h1>
-                    <p>Hoi, ik ben Goudlokje en vandaag wil ik jouw helpen.</p>
+                    <p>Hoi, ik ben Sanka en vandaag wil ik jouw helpen.</p>
                 </div>
                 <img className="about-presentation-img" src={goldfishImg} />
             </div>
