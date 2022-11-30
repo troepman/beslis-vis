@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .answer-status-container {
     position: relative;
     align-self: stretch;

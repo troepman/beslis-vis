@@ -1,49 +1,62 @@
+.home-form {
+  flex: 1 0 auto;
+}
 .question-intro {
     text-align: center;
     margin-bottom: 20px;
   }
 
 
-  .text-input {
-    flex: 1 0 auto;
-    border: 2px solid gray;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: #efefef;
-    color:gray;
-    font-family: 'Silkscreen', cursive;
-    outline: none;
-    transition: border-color 0.3s,
-                background-color 0.3s,
-                box-shadow 0.3s;
-  
-    box-shadow:  3px 3px 5px 0px #00000050;
-  }
-  
-  .text-input:focus, .text-input:active {
-    background-color: #ffefef;
-    border: 2px solid darkgoldenrod;
-    box-shadow: 1px 1px 5px 0px #00000050;
-  }
-  
-  .go.button {
-    letter-spacing: -5pt;
-    padding: 0px;
-    padding-left: 0px;
-    font-size: 32pt;
-    height: 60px;
-  }
-  .go.button:hover {
-    padding-left: 10px;
-    letter-spacing:-10pt;   
-  }
-  .search-wrapper {
-    height:100px;
-  }
-  .search {
-    display: block;
-    position: absolute;
-    transform: translate(-50%, 0); 
-    left: 50%;
-    text-align: center;
-  }
+.text-input {
+  flex: 1 0 auto;
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #efefef;
+  color:gray;
+  font-family: 'Silkscreen', cursive;
+  outline: none;
+  transition: border-color 0.3s,
+              background-color 0.3s,
+              box-shadow 0.3s;
+
+  box-shadow:  3px 3px 5px 0px #00000050;
+}
+
+.text-input:focus, .text-input:active {
+  background-color: #ffefef;
+  border: 2px solid darkgoldenrod;
+  box-shadow: 1px 1px 5px 0px #00000050;
+}
+
+.go.button {
+  letter-spacing: -5pt;
+  padding: 0px;
+  padding-left: 0px;
+  font-size: 32pt;
+  height: 60px;
+}
+.go.button:hover {
+  padding-left: 10px;
+  letter-spacing:-10pt;   
+}
+.search-wrapper {
+  height:100px;
+}
+.search {
+  display: block;
+  position: absolute;
+  transform: translate(-50%, 0); 
+  left: 50%;
+  text-align: center;
+}
+
+div.footer {
+  flex-grow: 0;
+  font-size: 10pt;
+  padding: 5px;
+}
+.hspacer {
+  margin-left: 5px;
+  margin-right: 5px;
+}

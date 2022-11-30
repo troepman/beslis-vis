@@ -110,9 +110,7 @@ export default function AnswerPage() {
 
     return (
         <div className="answer-content">
-            <span className="video-answer-question text-align-center" id="video-answer-question">
-                {question}
-            </span>
+            <span className="vspace text-align-center">{question}</span>
             <div className="answer-video-wrapper">
                 <video className="answer-video" ref={videoRef} muted onLoadedData={onVideoReady} src={videoUrl}></video>
                 <div
